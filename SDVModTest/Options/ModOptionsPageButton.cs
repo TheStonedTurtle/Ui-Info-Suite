@@ -27,8 +27,8 @@ namespace UIInfoSuite.Options
             height = 64;
             if (Game1.activeClickableMenu is GameMenu activeClickableMenu)
             {
-                xPositionOnScreen = activeClickableMenu.xPositionOnScreen + activeClickableMenu.width - 200;
-                yPositionOnScreen = activeClickableMenu.yPositionOnScreen + 16;
+                xPositionOnScreen = (int)Utility.ModifyCoordinateForUIScale(activeClickableMenu.xPositionOnScreen + activeClickableMenu.width - 200);
+                yPositionOnScreen = (int)Utility.ModifyCoordinateForUIScale(activeClickableMenu.yPositionOnScreen + 16);
                 Bounds = new Rectangle(xPositionOnScreen, yPositionOnScreen, width, height);
             }
             events.Input.ButtonPressed += OnButtonPressed;
@@ -53,8 +53,8 @@ namespace UIInfoSuite.Options
         {
             if (e.Button == SButton.MouseLeft || e.Button == SButton.ControllerA)
             {
-                int x = (int)e.Cursor.ScreenPixels.X;
-                int y = (int)e.Cursor.ScreenPixels.Y;
+                int x = (int)Utility.ModifyCoordinateForUIScale(e.Cursor.ScreenPixels.X);
+                int y = (int)Utility.ModifyCoordinateForUIScale(e.Cursor.ScreenPixels.Y);
                 if (isWithinBounds(x, y))
                 {
                     receiveLeftClick(x, y);
@@ -98,7 +98,7 @@ namespace UIInfoSuite.Options
                 SpriteEffects.None, 
                 1f);
 
-            if (isWithinBounds(Game1.getMouseX(), Game1.getMouseY()))
+            if (isWithinBounds(Game1.getMouseX(true), Game1.getMouseY(true)))
             {
                 IClickableMenu.drawHoverText(Game1.spriteBatch, _helper.SafeGetString(OptionKeys.UIOptions), Game1.smallFont);
             }
