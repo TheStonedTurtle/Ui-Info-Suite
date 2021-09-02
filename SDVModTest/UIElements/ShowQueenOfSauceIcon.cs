@@ -192,7 +192,7 @@ namespace UIInfoSuite.UIElements
 
                     texture.draw(Game1.spriteBatch);
 
-                    if (texture.containsPoint(Game1.getMouseX(), Game1.getMouseY()))
+                    if (texture.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true)))
                     {
                         IClickableMenu.drawHoverText(
                             Game1.spriteBatch,
@@ -210,7 +210,7 @@ namespace UIInfoSuite.UIElements
         {
             // draw hover text
             if (_drawQueenOfSauceIcon &&
-                (_queenOfSauceIcon?.containsPoint(Game1.getMouseX(), Game1.getMouseY()) ?? false))
+                (_queenOfSauceIcon?.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true)) ?? false))
             {
                 IClickableMenu.drawHoverText(
                     Game1.spriteBatch,

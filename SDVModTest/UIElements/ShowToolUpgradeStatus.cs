@@ -140,7 +140,7 @@ namespace UIInfoSuite.UIElements
         {
             // draw hover text
             if (_toolBeingUpgraded != null && 
-                (_toolUpgradeIcon?.containsPoint(Game1.getMouseX(), Game1.getMouseY()) ?? false))
+                (_toolUpgradeIcon?.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true)) ?? false))
             {
                 IClickableMenu.drawHoverText(
                         Game1.spriteBatch,

@@ -83,7 +83,7 @@ namespace UIInfoSuite.UIElements
         {
             if (Game1.activeClickableMenu is GameMenu &&
                 (Game1.activeClickableMenu as GameMenu).currentTab == 0 &&
-                _showBillboardButton.containsPoint((int)Utility.ModifyCoordinateForUIScale(Game1.getMouseX()), (int)Utility.ModifyCoordinateForUIScale(Game1.getMouseY()))
+                _showBillboardButton.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true))
                 && _heldItem == null)
             {
                 if (Game1.questOfTheDay != null &&

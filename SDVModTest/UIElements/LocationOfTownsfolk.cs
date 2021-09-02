@@ -197,7 +197,7 @@ namespace UIInfoSuite.UIElements
                 for (int i = slotPosition; i < slotPosition + 5; ++i)
                 {
                     OptionsCheckbox checkbox = _checkboxes[i];
-                    if (checkbox.bounds.Contains(Game1.getMouseX(), Game1.getMouseY()) &&
+                    if (checkbox.bounds.Contains(Game1.getMouseX(true), Game1.getMouseY(true)) &&
                         !checkbox.greyedOut)
                     {
                         checkbox.isChecked = !checkbox.isChecked;
@@ -510,7 +510,7 @@ namespace UIInfoSuite.UIElements
                             1f);
                     }
 
-                    if (checkbox.bounds.Contains(Game1.getMouseX(), Game1.getMouseY()))
+                    if (checkbox.bounds.Contains(Game1.getMouseX(true), Game1.getMouseY(true)))
                         IClickableMenu.drawHoverText(
                             Game1.spriteBatch,
                             "Track on map",

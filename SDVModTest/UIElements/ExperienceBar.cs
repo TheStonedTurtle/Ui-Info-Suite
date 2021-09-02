@@ -584,7 +584,7 @@ namespace UIInfoSuite.UIElements
                     new Rectangle(0, 0, 0, 0),
                     Game1.pixelZoom);
 
-            if (textureComponent.containsPoint(Game1.getMouseX(), Game1.getMouseY()))
+            if (textureComponent.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true)))
             {
                 Game1.drawWithBorder(
                     experienceGainedThisLevel + "/" + experienceRequiredForNextLevel,
