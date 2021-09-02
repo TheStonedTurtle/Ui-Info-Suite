@@ -64,11 +64,11 @@ namespace UIInfoSuite.UIElements
                             animal.Value.currentProduce.Value > 0 &&
                             animal.Value.age.Value >= animal.Value.ageWhenMature.Value)
                         {
-                            Vector2 positionAboveAnimal = GetPetPositionAboveAnimal(animal.Value);
+                            Vector2 positionAboveAnimal = Utility.ModifyCoordinatesForUIScale(GetPetPositionAboveAnimal(animal.Value));
                             positionAboveAnimal.Y += (float)(Math.Sin(Game1.currentGameTime.TotalGameTime.TotalMilliseconds / 300.0 + (double)animal.Value.Name.GetHashCode()) * 5.0);
                             Game1.spriteBatch.Draw(
                                 Game1.emoteSpriteSheet,
-                                Utility.ModifyCoordinatesForUIScale(new Vector2(positionAboveAnimal.X + 14f, positionAboveAnimal.Y)),
+                                new Vector2(positionAboveAnimal.X + 14f, positionAboveAnimal.Y),
                                 new Rectangle(3 * (Game1.tileSize / 4) % Game1.emoteSpriteSheet.Width, 3 * (Game1.tileSize / 4) / Game1.emoteSpriteSheet.Width * (Game1.tileSize / 4), Game1.tileSize / 4, Game1.tileSize / 4),
                                 Color.White * 0.9f,
                                 0.0f,
@@ -80,7 +80,7 @@ namespace UIInfoSuite.UIElements
                             Rectangle sourceRectangle = GameLocation.getSourceRectForObject(animal.Value.currentProduce.Value);
                             Game1.spriteBatch.Draw(
                                 Game1.objectSpriteSheet,
-                                Utility.ModifyCoordinatesForUIScale(new Vector2(positionAboveAnimal.X + 28f, positionAboveAnimal.Y + 8f)),
+                                new Vector2(positionAboveAnimal.X + 28f, positionAboveAnimal.Y + 8f),
                                 sourceRectangle,
                                 Color.White * 0.9f,
                                 0.0f,
