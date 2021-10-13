@@ -27,8 +27,8 @@ namespace UIInfoSuite.Options
             height = 64;
             if (Game1.activeClickableMenu is GameMenu activeClickableMenu)
             {
-                xPositionOnScreen = (int)Utility.ModifyCoordinateForUIScale(activeClickableMenu.xPositionOnScreen + activeClickableMenu.width - 200);
-                yPositionOnScreen = (int)Utility.ModifyCoordinateForUIScale(activeClickableMenu.yPositionOnScreen + 16);
+                xPositionOnScreen = activeClickableMenu.xPositionOnScreen + activeClickableMenu.width - 200;
+                yPositionOnScreen = activeClickableMenu.yPositionOnScreen + 16;
                 Bounds = new Rectangle(xPositionOnScreen, yPositionOnScreen, width, height);
             }
             events.Input.ButtonPressed += OnButtonPressed;
