@@ -77,7 +77,7 @@ namespace UIInfoSuite.UIElements
                     }
                 }
 
-                if (Game1.player.CurrentItem is Item currentItem && currentItem.isPlaceable())
+                if (Game1.player.CurrentItem is Item currentItem)
                 {
                     String name = currentItem.Name.ToLower();
                     List<StardewValley.Object> objects = null;
@@ -118,37 +118,50 @@ namespace UIInfoSuite.UIElements
                         if (arrayToUse != null)
                             ParseConfigToHighlightedArea(arrayToUse, TileUnderMouseX, TileUnderMouseY);
 
-                        objects = GetObjectsInLocationOfSimilarName("sprinkler");
-                        foreach (StardewValley.Object next in objects)
-                        {
-                            string objectName = next.name.ToLower();
-                            bool hasPressureNozzle = next.heldObject.Value != null && next.heldObject.Value.DisplayName.Contains("Nozzle");
-                            if (objectName.Contains("iridium"))
-                            {
-                                arrayToUse = GetObjectDistanceArray(ObjectWithDistance.IridiumSprinkler, hasPressureNozzle);
-                            }
-                            else if (objectName.Contains("quality"))
-                            {
-                                arrayToUse = GetObjectDistanceArray(ObjectWithDistance.QualitySprinkler, hasPressureNozzle);
-                            }
-                            else if (objectName.Contains("prismatic"))
-                            {
-                                arrayToUse = GetObjectDistanceArray(ObjectWithDistance.PrismaticSprinkler, hasPressureNozzle);
-                            }
-                            else
-                            {
-                                arrayToUse = GetObjectDistanceArray(ObjectWithDistance.Sprinkler, hasPressureNozzle);
-                            }
-
-                            if (arrayToUse != null)
-                                ParseConfigToHighlightedArea(arrayToUse, (int)next.TileLocation.X, (int)next.TileLocation.Y);
-                        }
+                        HighlightNearbySprinklers();
                     }
                     else if (name.Contains("bee house"))
                     {
                         ParseConfigToHighlightedArea(GetObjectDistanceArray(ObjectWithDistance.Beehouse), TileUnderMouseX, TileUnderMouseY);
                     }
+                    else if (name.Contains("nozzle"))
+                    {
+                        if (Game1.currentLocation == null)
+                        {
+                            return;
+                        }
 
+                        StardewValley.Object _currentCursorObj;
+                        Game1.currentLocation.Objects.TryGetValue(Game1.currentCursorTile, out _currentCursorObj);
+                        if (_currentCursorObj != null)
+                        {
+                            String hoverName = _currentCursorObj.Name.ToLower();
+                            if (hoverName.Contains("sprinkler"))
+                            {
+                                if (hoverName.Contains("iridium"))
+                                {
+                                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.IridiumSprinkler, true);
+                                }
+                                else if (hoverName.Contains("quality"))
+                                {
+                                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.QualitySprinkler, true);
+                                }
+                                else if (hoverName.Contains("prismatic"))
+                                {
+                                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.PrismaticSprinkler, true);
+                                }
+                                else
+                                {
+                                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.Sprinkler, true);
+                                }
+
+                                if (arrayToUse != null)
+                                    ParseConfigToHighlightedArea(arrayToUse, TileUnderMouseX, TileUnderMouseY);
+                            }
+                        }
+
+                        HighlightNearbySprinklers(_currentCursorObj);
+                    }
                 }
             }
 
@@ -325,6 +338,41 @@ namespace UIInfoSuite.UIElements
         private static double GetDistance(int i, int j, int radius)
         {
             return Math.Sqrt(Math.Pow(radius - i, 2) + Math.Pow(radius - j, 2));
+        }
+
+        private void HighlightNearbySprinklers(StardewValley.Object ignoredSprinkler = null)
+        {
+            List<StardewValley.Object> objects = GetObjectsInLocationOfSimilarName("sprinkler");
+            foreach (StardewValley.Object next in objects)
+            {
+                if (ignoredSprinkler != null && ignoredSprinkler.Equals(next))
+                {
+                    continue;
+                }
+
+                string objectName = next.name.ToLower();
+                bool hasPressureNozzle = next.heldObject.Value != null && next.heldObject.Value.DisplayName.Contains("Nozzle");
+                int[][] arrayToUse;
+                if (objectName.Contains("iridium"))
+                {
+                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.IridiumSprinkler, hasPressureNozzle);
+                }
+                else if (objectName.Contains("quality"))
+                {
+                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.QualitySprinkler, hasPressureNozzle);
+                }
+                else if (objectName.Contains("prismatic"))
+                {
+                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.PrismaticSprinkler, hasPressureNozzle);
+                }
+                else
+                {
+                    arrayToUse = GetObjectDistanceArray(ObjectWithDistance.Sprinkler, hasPressureNozzle);
+                }
+
+                if (arrayToUse != null)
+                    ParseConfigToHighlightedArea(arrayToUse, (int)next.TileLocation.X, (int)next.TileLocation.Y);
+            }
         }
     }
 }
