@@ -279,7 +279,7 @@ namespace UIInfoSuite.Options
         {
             if (b == Buttons.A)
             {
-                receiveLeftClick(Game1.getMouseX(), Game1.getMouseY());
+                receiveLeftClick(Game1.getMouseX(true), Game1.getMouseY(true));
             }
         }
 

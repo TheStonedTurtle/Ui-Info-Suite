@@ -204,16 +204,19 @@ namespace UIInfoSuite.UIElements
                 {
                     // draw tile outlines
                     foreach (Point point in _effectiveArea)
+                    {
+                        var position = new Vector2(point.X * Utility.ModifyCoordinateFromUIScale(Game1.tileSize), point.Y * Utility.ModifyCoordinateFromUIScale(Game1.tileSize));
                         Game1.spriteBatch.Draw(
                             Game1.mouseCursors,
-                            Game1.GlobalToLocal(new Vector2(point.X * Game1.tileSize, point.Y * Game1.tileSize)),
+                            Utility.ModifyCoordinatesForUIScale(Game1.GlobalToLocal(Utility.ModifyCoordinatesForUIScale(position))),
                             new Rectangle(194, 388, 16, 16),
                             Color.White * 0.7f,
                             0.0f,
                             Vector2.Zero,
-                            Game1.pixelZoom,
+                            Utility.ModifyCoordinateForUIScale(Game1.pixelZoom),
                             SpriteEffects.None,
                             0.01f);
+                    }
                 }
                 finally
                 {

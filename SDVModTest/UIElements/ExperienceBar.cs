@@ -422,9 +422,9 @@ namespace UIInfoSuite.UIElements
                     Vector2 playerLocalPosition = Game1.player.getLocalPosition(Game1.viewport);
                     Game1.spriteBatch.Draw(
                         Game1.mouseCursors,
-                        new Vector2(
+                        Utility.ModifyCoordinatesForUIScale(new Vector2(
                             playerLocalPosition.X - 74,
-                            playerLocalPosition.Y - 130),
+                            playerLocalPosition.Y - 130)),
                         _levelUpIconRectangle,
                         _iconColor,
                         0,
@@ -438,9 +438,9 @@ namespace UIInfoSuite.UIElements
                             LanguageKeys.LevelUp),
                         Color.DarkSlateGray,
                         Color.PaleTurquoise,
-                        new Vector2(
+                        Utility.ModifyCoordinatesForUIScale(new Vector2(
                             playerLocalPosition.X - 28,
-                            playerLocalPosition.Y - 130));
+                            playerLocalPosition.Y - 130)));
                 }
 
                 for (int i = _experiencePointDisplays.Count - 1; i >= 0; --i)
@@ -584,7 +584,7 @@ namespace UIInfoSuite.UIElements
                     new Rectangle(0, 0, 0, 0),
                     Game1.pixelZoom);
 
-            if (textureComponent.containsPoint(Game1.getMouseX(), Game1.getMouseY()))
+            if (textureComponent.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true)))
             {
                 Game1.drawWithBorder(
                     experienceGainedThisLevel + "/" + experienceRequiredForNextLevel,

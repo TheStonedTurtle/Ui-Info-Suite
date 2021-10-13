@@ -83,7 +83,7 @@ namespace UIInfoSuite.UIElements
         {
             if (Game1.activeClickableMenu is GameMenu &&
                 (Game1.activeClickableMenu as GameMenu).currentTab == 0 &&
-                _showBillboardButton.containsPoint(Game1.getMouseX(), Game1.getMouseY())
+                _showBillboardButton.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true))
                 && _heldItem == null)
             {
                 if (Game1.questOfTheDay != null &&
@@ -91,7 +91,7 @@ namespace UIInfoSuite.UIElements
                     Game1.questOfTheDay.currentObjective = "wat?";
 
                 Game1.activeClickableMenu =
-                    new Billboard(!(Game1.getMouseX() <
+                    new Billboard(!(Utility.ModifyCoordinateForUIScale(Game1.getMouseX()) <
                     _showBillboardButton.bounds.X + _showBillboardButton.bounds.Width / 2));
             }
         }

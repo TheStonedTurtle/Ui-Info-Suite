@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Netcode;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Characters;
 using StardewValley.Network;
@@ -63,7 +64,7 @@ namespace UIInfoSuite.UIElements
                             animal.Value.currentProduce.Value > 0 &&
                             animal.Value.age.Value >= animal.Value.ageWhenMature.Value)
                         {
-                            Vector2 positionAboveAnimal = GetPetPositionAboveAnimal(animal.Value);
+                            Vector2 positionAboveAnimal = Utility.ModifyCoordinatesForUIScale(GetPetPositionAboveAnimal(animal.Value));
                             positionAboveAnimal.Y += (float)(Math.Sin(Game1.currentGameTime.TotalGameTime.TotalMilliseconds / 300.0 + (double)animal.Value.Name.GetHashCode()) * 5.0);
                             Game1.spriteBatch.Draw(
                                 Game1.emoteSpriteSheet,
@@ -180,7 +181,7 @@ namespace UIInfoSuite.UIElements
                         }
                         Game1.spriteBatch.Draw(
                             Game1.mouseCursors,
-                            new Vector2(positionAboveAnimal.X, positionAboveAnimal.Y + _yMovementPerDraw),
+                            Utility.ModifyCoordinatesForUIScale(new Vector2(positionAboveAnimal.X, positionAboveAnimal.Y + _yMovementPerDraw)),
                             new Rectangle(32, 0, 16, 16),
                             Color.White * _alpha,
                             0.0f,
@@ -205,7 +206,7 @@ namespace UIInfoSuite.UIElements
                     positionAboveAnimal.Y -= 20f;
                     Game1.spriteBatch.Draw(
                         Game1.mouseCursors,
-                        new Vector2(positionAboveAnimal.X, positionAboveAnimal.Y + _yMovementPerDraw),
+                        Utility.ModifyCoordinatesForUIScale(new Vector2(positionAboveAnimal.X, positionAboveAnimal.Y + _yMovementPerDraw)),
                         new Rectangle(32, 0, 16, 16),
                         Color.White * _alpha,
                         0.0f,

@@ -265,13 +265,13 @@ namespace UIInfoSuite.UIElements
 
                 int windowY = Game1.getMouseY() + 20;
 
-                windowY = Game1.viewport.Height - windowHeight - windowY < 0 ? Game1.viewport.Height - windowHeight : windowY;
+                windowY = Game1.uiViewport.Height - windowHeight - windowY < 0 ? Game1.uiViewport.Height - windowHeight : windowY;
 
                 int windowX = Game1.getMouseX() - windowWidth - 25;
 
-                if (Game1.getMouseX() > Game1.viewport.Width - 300)
+                if (Game1.getMouseX() > Game1.uiViewport.Width - 300)
                 {
-                    windowX = Game1.viewport.Width - windowWidth - 350;
+                    windowX = Game1.uiViewport.Width - windowWidth - 350;
                 }
                 else if (windowX < 0)
                 {

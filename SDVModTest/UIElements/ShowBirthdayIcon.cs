@@ -141,7 +141,7 @@ namespace UIInfoSuite.UIElements
         {
             // draw hover text
             if (_birthdayNPC != null &&
-                (_birthdayIcon?.containsPoint(Game1.getMouseX(), Game1.getMouseY()) ?? false))
+                (_birthdayIcon?.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true)) ?? false))
             {
                 String hoverText = String.Format(_helper.SafeGetString(LanguageKeys.NPCBirthday), _birthdayNPC.Name);
                 IClickableMenu.drawHoverText(
